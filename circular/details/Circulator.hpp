@@ -14,13 +14,12 @@ namespace Circular::Details
   {
     using difference_type = typename T::differnce_type;
     using value_type = typename T::value_type;
-    using reference = typename T::refernce;
   }; // end of struct CirculatorTraits
 
-
-  template<typename Iter,
-           typename Size = ::Circular::Details::integer,
-           typename Index = ::Circular::Details::integer>
+  template<
+    typename Iter,
+    typename Size = integer,
+    typename Index = integer>
   class Circulator
   {
     using size_type = Size;
@@ -34,8 +33,8 @@ namespace Circular::Details
   public:
 
     using differnce_type = index_type;
-    using value_type = typename ::Circular::Details::iterator_traits<iterator_type>::value_type;
-    using reference = typename ::Circular::Details::iterator_traits<iterator_type>::reference;
+    using value_type = typename iterator_traits<iterator_type>::value_type;
+    using reference = typename iterator_traits<iterator_type>::reference;
 
     Circulator(iterator_type first, iterator_type last)
       : it(first)
@@ -103,6 +102,34 @@ namespace Circular::Details
     }
 
   private:
+
+    friend Circulator
+    operator +(Circulator const& x, index_type n){
+      auto result = x;
+      result += n;
+      return result;
+    }
+
+    friend Circulator
+    operator +(index_type n, Circulator const& x){
+      auto result = x;
+      result += n;
+      return result;
+    }
+
+    friend Circulator
+    operator -(Circulator const& x, index_type n){
+      auto result = x;
+      result -= n;
+      return result;
+    }
+
+    friend Circulator
+    prev(Circulator const& x){ return x-1; }
+
+    friend Circulator
+    next(Circulator const& x){ return x+1; }
+
 
     friend bool
     operator ==(Circulator const& x, Circulator const& y)

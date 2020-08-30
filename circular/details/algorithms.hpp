@@ -106,24 +106,16 @@ namespace Circular::Details
   }
 
   template<typename InputCirc, typename UnaryPredicate>
-  typename CirculatorTraits<InputCirc>::differnce_type
+  integer
   countIf(InputCirc first, UnaryPredicate pred)
   {
-    typename CirculatorTraits<InputCirc>::differnce_type result = 0;
-    auto it = first;
-    do
-    {
-      if(pred(it))
-      {
-        ++result;
-      }
-    }
-    while(it != first);
+    integer result = 0;
+    forEach(first, [&](auto it){ if(pred(it)){ result += 1; }});
     return result;
   }
 
   template<typename InputCirc, typename T>
-  typename CirculatorTraits<InputCirc>::differnce_type
+  integer
   countEach(InputCirc first, T const& value)
   {
     return countIf(first, [&](auto it){ return *it == value; });
