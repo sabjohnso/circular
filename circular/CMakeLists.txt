@@ -19,7 +19,7 @@ install(TARGETS circular_header
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/config.hpp
   Circulator.hpp
-  Circulant.hppo
+  Circulant.hpp
   FixedCirculant.hpp
   DESTINATION ${circular_INSTALL_INCLUDEDIR}/circular)
 
