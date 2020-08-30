@@ -7,7 +7,7 @@ target_include_directories(circular_header
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
   $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}>
   $<INSTALL_INTERFACE:${circular_INSTALL_INCLUDEDIR}>)
-
+target_link_libraries(circular_header INTERFACE type_utility::type_utility)
 add_library(circular::header ALIAS circular_header)
   
 install(TARGETS circular_header
